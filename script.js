@@ -87,16 +87,35 @@ tsParticles.load("tsparticles", {
 });
 
 // CONTACT FORM
+emailjs.init("jWfXzuBzxIIJ1MHyE");
 
-const form = document.querySelector(".contact-form");
+const form = document.getElementById("contact-form");
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", function (e) {
 
   e.preventDefault();
 
-  alert("Message Sent Successfully!");
+  emailjs.sendForm(
+    "service_tlm8t8k",
+    "template_59xjk79",
+    this
+  )
 
-  form.reset();
+  .then(() => {
+
+    alert("Email Sent Successfully!");
+
+    form.reset();
+
+  })
+
+  .catch((error) => {
+
+    alert("Failed To Send Email");
+
+    console.log(error);
+
+  });
 
 });
 
